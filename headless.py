@@ -6,7 +6,6 @@
 
 
 import os
-import win32clipboard
 import selenium
 import numpy as np
 from selenium import webdriver
