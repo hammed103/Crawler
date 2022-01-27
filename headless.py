@@ -6,6 +6,7 @@
 
 
 import os
+import numpy as np
 import selenium
 import numpy as np
 from selenium import webdriver
