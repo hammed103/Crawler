@@ -88,7 +88,7 @@ def selex(idx, x):
 
 #authorization
 #Obtained freely from googlesheetapi
-gc = pygsheets.authorize(service_file='new/my-project-1515950162194-4db978de441c.json')
+gc = pygsheets.authorize(service_file='my-project-1515950162194-4db978de441c.json')
 
 
 # In[ ]:
