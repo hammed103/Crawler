@@ -40,7 +40,7 @@ driver = webdriver.Chrome( executable_path=CHROMEDRIVER_PATH, chrome_options=chr
 
 #driver = webdriver.Chrome(r"C:\Users\SteelSeries\Desktop\Chromedriver.exe")
 
-driver.implicitly_wait(5)
+driver.implicitly_wait(15)
 
 
 # In[25]:
@@ -57,8 +57,10 @@ def selex(idx, x):
     except NoSuchElementException :
         try:
             stat = driver.find_element_by_xpath('//*[@id="react-root"]/div/div/div[1]/header/div/h1').text
+            print(stat)
         except NoSuchElementException :
             stat = driver.find_element_by_xpath('//*[@id="react-root"]/div/div/div[2]/header/div[1]/h1').text
+            print('NoShow')
 
         wks.update_value('C' + str(idx +2) ,stat)
 
@@ -105,7 +107,7 @@ def runner():
         ft = rt.copy()
         ft = ft.reset_index().rename(columns = {'index':'indexz'})
 
-        ft.apply(lambda x : selex(x.indexz,'https://inst.cr/t/eTQwMlhqekk1'), axis=1)
+        ft.apply(lambda x : selex(x.indexz,x['Order URL']), axis=1)
         sleep(interval)
     # In[ ]:
 if __name__ == '__main__' :
