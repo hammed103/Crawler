@@ -24,7 +24,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 import pygsheets
 import pandas as pd
-CHROMEDRIVER_PATH = /app/.chromedriver/bin/chromedriver
+CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
 
 
 chrome_options = webdriver.ChromeOptions()
