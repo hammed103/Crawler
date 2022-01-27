@@ -24,7 +24,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 import pygsheets
-import pandas as
+import pandas as pd
 
 
 GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
@@ -99,13 +99,13 @@ def selex(idx, x):
 
 #authorization
 #Obtained freely from googlesheetapi
-gc = pygsheets.authorize(service_file='new/my-project-1515950162194-4db978de441c.json')
+gc = pygsheets.authorize(service_file='my-project-1515950162194-4db978de441c.json')
 
 
 # In[ ]:
 
 
-interval = 2 #seconds
+interval = 10 #seconds
 iterations = 10 #times
 
 
