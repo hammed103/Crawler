@@ -6,12 +6,12 @@
 
 
 import os
+import numpy as np
 import selenium
 import numpy as np
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException ,StaleElementReferenceException,InvalidArgumentException
 from selenium.common.exceptions import NoSuchElementException,ElementClickInterceptedException
-from webdriver_manager.chrome import ChromeDriverManager as CM
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -39,7 +39,7 @@ chrome_options.add_argument("--headless")
 
 #chrome_options.headless = True # also works
 
-driver = webdriver.Chrome(execution_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
 
 #driver = webdriver.Chrome(r"C:\Users\SteelSeries\Desktop\Chromedriver.exe")
 
@@ -86,16 +86,6 @@ def selex(idx, x):
 #wks.update_value('C' + str(idx +2) ,stat)
 
 
-# In[30]:
-
-
-
-
-
-# In[15]:
-
-
-
 #authorization
 #Obtained freely from googlesheetapi
 gc = pygsheets.authorize(service_file='my-project-1515950162194-4db978de441c.json')
@@ -104,24 +94,22 @@ gc = pygsheets.authorize(service_file='my-project-1515950162194-4db978de441c.jso
 # In[ ]:
 
 
-interval = 10 #seconds
+interval = 2 #seconds
 iterations = 10 #times
 
 
 # In[31]:
+def runner():
+    while (iterations > 0):
+        sh = gc.open('Monitoro Tracker')
 
+        #select the first sheet
+        wks = sh[0]
+        rt = pd.DataFrame(wks.get_all_records())
+        ft = rt.copy()
+        ft = ft.reset_index().rename(columns = {'index':'indexz'})
 
-while (iterations > 0):
-    sh = gc.open('Monitoro Tracker')
-
-    #select the first sheet
-    wks = sh[0]
-    rt = pd.DataFrame(wks.get_all_records())
-    ft = rt.copy()
-    ft = ft.reset_index().rename(columns = {'index':'indexz'})
-
-    ft.apply(lambda x : selex(x.indexz,x['Order URL']), axis=1)
-    sleep(interval)
-
-
-# In[ ]:
+        ft.apply(lambda x : selex(x.indexz,x['Order URL']), axis=1)
+        sleep(interval)
+    # In[ ]:
+if __name__ == '__main__

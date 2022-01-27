@@ -112,5 +112,5 @@ def runner():
         ft.apply(lambda x : selex(x.indexz,x['Order URL']), axis=1)
         sleep(interval)
     # In[ ]:
-if __name__ == '__main__ :
+if __name__ == '__main__' :
     runner()
