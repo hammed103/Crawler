@@ -24,6 +24,8 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 import pygsheets
 import pandas as pd
+CHROMEDRIVER_PATH = /app/.chromedriver/bin/chromedriver
+
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
