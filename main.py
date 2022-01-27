@@ -46,7 +46,7 @@ driver.implicitly_wait(15)
 # In[25]:
 
 
-def selex(idx, x):
+def selex(idx, x,wks):
     global driver
     driver.get(x)
     sleep(1)
@@ -93,7 +93,7 @@ gc = pygsheets.authorize(service_file='my-project-1515950162194-4db978de441c.jso
 # In[ ]:
 
 
-interval = 2 #seconds
+interval = 20 #seconds
 iterations = 10 #times
 
 
@@ -107,7 +107,7 @@ def runner():
         ft = rt.copy()
         ft = ft.reset_index().rename(columns = {'index':'indexz'})
 
-        ft.apply(lambda x : selex(x.indexz,x['Order URL']), axis=1)
+        ft.apply(lambda x : selex(x.indexz,x['Order URL'],wks), axis=1)
         sleep(interval)
     # In[ ]:
 if __name__ == '__main__' :
