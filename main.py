@@ -6,6 +6,7 @@
 
 
 import os
+import numpy as np
 import selenium
 import numpy as np
 from selenium import webdriver
@@ -38,7 +39,7 @@ chrome_options.add_argument("--headless")
 
 #chrome_options.headless = True # also works
 
-driver = webdriver.Chrome(execution_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+driver = webdriver.Chrome( executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
 
 #driver = webdriver.Chrome(r"C:\Users\SteelSeries\Desktop\Chromedriver.exe")
 
@@ -85,19 +86,9 @@ def selex(idx, x):
 #wks.update_value('C' + str(idx +2) ,stat)
 
 
-# In[30]:
-
-
-
-
-
-# In[15]:
-
-
-
 #authorization
 #Obtained freely from googlesheetapi
-gc = pygsheets.authorize(service_file='new/my-project-1515950162194-4db978de441c.json')
+gc = pygsheets.authorize(service_file='my-project-1515950162194-4db978de441c.json')
 
 
 # In[ ]:
@@ -121,5 +112,4 @@ def runner():
         ft.apply(lambda x : selex(x.indexz,x['Order URL']), axis=1)
         sleep(interval)
     # In[ ]:
-if __name__ == '__main__':
-    runner()
+if __name__ == '__main__
