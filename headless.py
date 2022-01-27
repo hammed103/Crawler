@@ -39,7 +39,7 @@ chrome_options.add_argument("--headless")
 
 #chrome_options.headless = True # also works
 
-driver = webdriver.Chrome(execution_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
 
 #driver = webdriver.Chrome(r"C:\Users\SteelSeries\Desktop\Chromedriver.exe")
 
