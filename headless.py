@@ -24,14 +24,24 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 import pygsheets
-import pandas as pd
+import pandas as
+
+
+GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
+CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
 chrome_options = Options()
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--disable-gpu')
+chrome_options.add_argument('--no-sandbox')
+chrome_options.binary_location = GOOGLE_CHROME_PATH
+
+
 chrome_options.add_argument("--headless")
 
 #chrome_options.headless = True # also works
 
-driver = webdriver.Chrome(executable_path=r"C:\Users\SteelSeries\Desktop\Chromedriver.exe",options=chrome_options)
-driver.delete_all_cookies()
+driver = webdriver.Chrome(execution_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+
 #driver = webdriver.Chrome(r"C:\Users\SteelSeries\Desktop\Chromedriver.exe")
 
 driver.implicitly_wait(5)
@@ -44,36 +54,36 @@ def selex(idx, x):
     global driver
     driver.get(x)
     sleep(1)
-    
+
     try :
         driver.find_element_by_xpath('//*[@id="react-root"]/div/div/p')
-      
+
     except NoSuchElementException :
         try:
             stat = driver.find_element_by_xpath('//*[@id="react-root"]/div/div/div[1]/header/div/h1').text
         except NoSuchElementException :
             stat = driver.find_element_by_xpath('//*[@id="react-root"]/div/div/div[2]/header/div[1]/h1').text
-            
+
         wks.update_value('C' + str(idx +2) ,stat)
-        
+
         try :
             dtls = driver.find_element_by_xpath('//*[@id="react-root"]/div/div/div[1]/header/div/p').text
         except NoSuchElementException :
             dtls = driver.find_element_by_xpath('//*[@id="react-root"]/div/div/div[2]/header/div/p').text
         wks.update_value('E' + str(idx +2) ,dtls)
-        
+
         try :
-        
-            
+
+
             img = driver.find_element_by_xpath('//*[@id="react-root"]/div/div/div[2]/div[1]/img').get_attribute('src')
             wks.update_value('F' + str(idx +2) ,img)
         except NoSuchElementException:
             pass
-      
 
-    
-    
-        
+
+
+
+
 #wks.update_value('C' + str(idx +2) ,stat)
 
 
@@ -105,18 +115,14 @@ iterations = 10 #times
 while (iterations > 0):
     sh = gc.open('Monitoro Tracker')
 
-    #select the first sheet 
+    #select the first sheet
     wks = sh[0]
     rt = pd.DataFrame(wks.get_all_records())
     ft = rt.copy()
     ft = ft.reset_index().rename(columns = {'index':'indexz'})
-    
+
     ft.apply(lambda x : selex(x.indexz,x['Order URL']), axis=1)
     sleep(interval)
 
 
 # In[ ]:
-
-
-
-
