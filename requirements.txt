@@ -2,4 +2,4 @@ pandas
 numpy
 selenium==3.141.0
 pygsheets
-chromium-browser
+chromedriver-binary
