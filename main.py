@@ -99,14 +99,13 @@ iterations = 10 #times
 def runner():
     while (iterations > 0):
         sh = gc.open('Monitoro Tracker')
-
         #select the first sheet
         wks = sh[0]
         rt = pd.DataFrame(wks.get_all_records())
         ft = rt.copy()
         ft = ft.reset_index().rename(columns = {'index':'indexz'})
 
-        ft.apply(lambda x : selex(x.indexz,x['Order URL']), axis=1)
+        ft.apply(lambda x : selex(x.indexz,'https://inst.cr/t/eTQwMlhqekk1'), axis=1)
         sleep(interval)
     # In[ ]:
 if __name__ == '__main__' :
