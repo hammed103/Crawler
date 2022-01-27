@@ -40,7 +40,7 @@ driver = webdriver.Chrome( executable_path=CHROMEDRIVER_PATH, chrome_options=chr
 
 #driver = webdriver.Chrome(r"C:\Users\SteelSeries\Desktop\Chromedriver.exe")
 
-driver.implicitly_wait(15)
+driver.implicitly_wait(4)
 
 
 # In[25]:
@@ -60,7 +60,7 @@ def selex(idx, x,wks):
             print(stat)
         except NoSuchElementException :
             stat = driver.find_element_by_xpath('//*[@id="react-root"]/div/div/div[2]/header/div[1]/h1').text
-            print('NoShow')
+            print(idx)
 
         wks.update_value('C' + str(idx +2) ,stat)
 
@@ -93,7 +93,7 @@ gc = pygsheets.authorize(service_file='my-project-1515950162194-4db978de441c.jso
 # In[ ]:
 
 
-interval = 20 #seconds
+interval = 30 #seconds
 iterations = 10 #times
 
 
