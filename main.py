@@ -50,33 +50,44 @@ def selex(idx, x,wks):
     global driver
     driver.get(x)
     sleep(1)
-
-    try :
-        driver.find_element_by_xpath('//*[@id="react-root"]/div/div/p')
-
-    except NoSuchElementException :
-        try:
-            stat = driver.find_element_by_xpath('//*[@id="react-root"]/div/div/div[1]/header/div/h1').text
-            print(stat)
-        except NoSuchElementException :
-            stat = driver.find_element_by_xpath('//*[@id="react-root"]/div/div/div[2]/header/div[1]/h1').text
-            print(idx)
-
-        wks.update_value('C' + str(idx +2) ,stat)
-
+    if x.find('inst.cr/t/') > -1 :
         try :
-            dtls = driver.find_element_by_xpath('//*[@id="react-root"]/div/div/div[1]/header/div/p').text
+            driver.find_element_by_xpath('//*[@id="react-root"]/div/div/p')
+
         except NoSuchElementException :
-            dtls = driver.find_element_by_xpath('//*[@id="react-root"]/div/div/div[2]/header/div/p').text
-        wks.update_value('E' + str(idx +2) ,dtls)
+            try:
+                stat = driver.find_element_by_xpath('//*[@id="react-root"]/div/div/div[1]/header/div/h1').text
+            except NoSuchElementException :
+                stat = driver.find_element_by_xpath('//*[@id="react-root"]/div/div/div[2]/header/div[1]/h1').text
 
-        try :
+            wks.update_value('C' + str(idx +2) ,stat)
+
+            try :
+                dtls = driver.find_element_by_xpath('//*[@id="react-root"]/div/div/div[1]/header/div/p').text
+            except NoSuchElementException :
+                dtls = driver.find_element_by_xpath('//*[@id="react-root"]/div/div/div[2]/header/div/p').text
+            wks.update_value('E' + str(idx +2) ,dtls)
+
+            try :
 
 
-            img = driver.find_element_by_xpath('//*[@id="react-root"]/div/div/div[2]/div[1]/img').get_attribute('src')
-            wks.update_value('F' + str(idx +2) ,img)
-        except NoSuchElementException:
-            pass
+                img = driver.find_element_by_xpath('//*[@id="react-root"]/div/div/div[2]/div[1]/img').get_attribute('src')
+                wks.update_value('F' + str(idx +2) ,img)
+            except NoSuchElementException:
+                pass
+    else :
+        if driver.current_url == 'https://www.doordash.com/' :
+            stat = 'Expired'
+        else :
+            full = driver.find_element_by_css_selector('div[data-testid="orderStatusSection"]').text.split('\n')
+            stat = full[0]
+            dtls = full[1]
+            wks.update_value('C' + str(idx +2) ,stat)
+
+            wks.update_value('E' + str(idx +2) ,dtls)
+
+
+
 
 
 
