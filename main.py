@@ -93,7 +93,7 @@ gc = pygsheets.authorize(service_file='my-project-1515950162194-4db978de441c.jso
 # In[ ]:
 
 
-interval = 30 #seconds
+interval = 60 #seconds
 iterations = 10 #times
 
 
