@@ -76,15 +76,16 @@ def selex(idx, x,wks):
             except NoSuchElementException:
                 pass
     else :
-        if driver.current_url == 'https://www.doordash.com/' :
-            stat = 'Expired'
-        else :
+        try :
             full = driver.find_element_by_css_selector('div[data-testid="orderStatusSection"]').text.split('\n')
             stat = full[0]
             dtls = full[1]
             wks.update_value('C' + str(idx +2) ,stat)
 
             wks.update_value('E' + str(idx +2) ,dtls)
+        except NoSuchElementException :
+            stat = 'Expired'
+            wks.update_value('C' + str(idx +2) ,stat)
 
 
 
