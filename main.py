@@ -49,7 +49,7 @@ driver.implicitly_wait(4)
 def selex(idx, x,wks):
     global driver
     driver.get(x)
-    sleep(1)
+    sleep(5)
     if x.find('inst.cr/t/') > -1 :
         try :
             driver.find_element_by_xpath('//*[@id="react-root"]/div/div/p')
