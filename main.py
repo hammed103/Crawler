@@ -77,7 +77,7 @@ def selex(idx, x,wks):
                 pass
     else :
         try :
-            full = driver.find_element_by_css_selector('div[data-testid="orderStatusSection"]').text.split('\n')
+            full = driver.find_element_by_css_selector('*').text.split('\n')
             stat = full[0]
             dtls = full[1]
             wks.update_value('C' + str(idx +2) ,stat)
